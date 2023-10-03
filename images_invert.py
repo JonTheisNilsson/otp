@@ -14,12 +14,11 @@ import getopt
 
 
 def usage():
-    print('usage: images_xor.py -p <plaintext> -k <key> -c <ciphertext>')
+    print('usage: images_invert.py -p <plaintext> -c <ciphertext>')
 
 
 def main(argv):
     plaintext_filename = ''
-    key_filename = ''
     encryption_filename = ''
     try:
         opts, args = getopt.getopt(argv, "p:k:c:")
@@ -30,21 +29,18 @@ def main(argv):
     for opt, arg in opts:
         if opt == '-p':
             plaintext_filename = arg
-        elif opt == '-k':
-            key_filename = arg
         elif opt == '-c':
             encryption_filename = arg
         else:
             usage()
             sys.exit()
 
-    if len(opts) != 3:  # check that all options are present
+    if len(opts) != 2:  # check that all options are present
         usage()
         sys.exit()
     try:
         # load images
         plaintext = Image.open(plaintext_filename).convert("1")
-        key = Image.open(key_filename).convert("1")
 
         # If either the plaintext or the key are not B/W images,
         # they will be converted to one.
@@ -53,7 +49,7 @@ def main(argv):
         # key.show()
 
         # compute the XOR
-        ciphertext = ImageChops.logical_xor(plaintext, key)
+        ciphertext = ImageChops.invert(plaintext)
         ciphertext.save(encryption_filename)
         print("Script finished successfully")
 

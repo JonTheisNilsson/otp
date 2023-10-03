@@ -53,7 +53,7 @@ def main(argv):
         # key.show()
 
         # compute the XOR
-        ciphertext = ImageChops.logical_xor(plaintext, key)
+        ciphertext = ImageChops.difference(plaintext, key)
         ciphertext.save(encryption_filename)
         print("Script finished successfully")
 

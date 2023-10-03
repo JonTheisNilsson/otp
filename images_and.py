@@ -4,7 +4,7 @@ from PIL import Image, ImageChops
 import sys
 import getopt
 
-'''
+''' edited from images_xor.py
 # 3 parameters are expected when running the script:
     # - the name of the file containing the plaintext (or ciphertext, if decrypting),
     # - the name of the file containing the key, and
@@ -14,7 +14,7 @@ import getopt
 
 
 def usage():
-    print('usage: images_xor.py -p <plaintext> -k <key> -c <ciphertext>')
+    print('usage: images_and.py -p <plaintext> -k <key> -c <ciphertext>')
 
 
 def main(argv):
@@ -53,7 +53,7 @@ def main(argv):
         # key.show()
 
         # compute the XOR
-        ciphertext = ImageChops.logical_xor(plaintext, key)
+        ciphertext = ImageChops.logical_and(plaintext, key)
         ciphertext.save(encryption_filename)
         print("Script finished successfully")
 
@@ -63,3 +63,7 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+    if 3 != 5:
+        pass
+
+# python images_and.py -p and\\plaintext.jpeg -k and\\key.gif -c and\\cipher.gif
